@@ -1,5 +1,5 @@
 function retrieveBalance(accountId) {
-    console.log(`Balance retrieved for accountId ${accountId}`);
+    console.log(`balance for ${accountId}`);
   }
   
   module.exports = { retrieveBalance };
