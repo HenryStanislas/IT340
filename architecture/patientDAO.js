@@ -9,4 +9,12 @@ function retrievePatientList() {
     return database.patient.map(({ id, lastName, firstName }) => ({ id, lastName, firstName }));
 }
 
-module.exports = { insertPatient, retrievePatientList };
+function updatePatient(updatedPatient) {
+    const index = database.patient.findIndex(patient => patient.id === updatedPatient.id);
+    database.patient[index] = updatedPatient;
+    console.log('patient mis a jour:', updatedPatient);
+}
+
+
+  
+module.exports = { insertPatient, retrievePatientList,updatePatient, };

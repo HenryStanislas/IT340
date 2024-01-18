@@ -1,12 +1,13 @@
 const Patient = require('./patient');
 const patientDAO = require('./patientDAO');
 const { v4: uuidv4 } = require('uuid');
+const database = require('./database');
 
 function addPatient(lastName, firstName) {
     const id = uuidv4();  
     const creationDate = new Date();
     const newPatient = new Patient(id, lastName, firstName, creationDate);
-    patientDAO.insertPatient(newPatient);
+    patientDAO.insertPatient(newPatient);   
 }
 
 function getPatientList() {
@@ -14,4 +15,13 @@ function getPatientList() {
     return patientDAO.retrievePatientList();
 }
 
-module.exports = { addPatient, getPatientList };
+function savePatient(id, lastName, firstName) {
+    const patientTrouve = database.patient.find(patient => patient.id === id);
+    patientTrouve.lastName = lastName;
+    patientTrouve.firstName = firstName;
+    patientDAO.updatePatient(patientTrouve);
+
+}
+
+
+module.exports = { addPatient, getPatientList,savePatient };
