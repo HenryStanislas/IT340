@@ -1,18 +1,16 @@
 const Patient = require('./patient');
-const patientDAO = require('./patientDAO');
-const { v4: uuidv4 } = require('uuid');
+const patientDAO = require('./patientCommandDAO');
 const database = require('./database');
+const cache = require('./cache.js');
 
 function addPatient(lastName, firstName) {
-    const id = uuidv4();  
+    const id = '';
     const creationDate = new Date();
     const newPatient = new Patient(id, lastName, firstName, creationDate);
-    patientDAO.insertPatient(newPatient);   
-}
+    patientDAO.insertPatient(newPatient);
+    patientDAO.insertPatientList(newPatient);   
+    cache[newPatient.id] = { id: newPatient.id, name: newPatient.lastName + " " + newPatient.firstName };
 
-function getPatientList() {
-
-    return patientDAO.retrievePatientList();
 }
 
 function savePatient(id, lastName, firstName) {
@@ -20,12 +18,11 @@ function savePatient(id, lastName, firstName) {
     patientTrouve.lastName = lastName;
     patientTrouve.firstName = firstName;
     patientDAO.updatePatient(patientTrouve);
-
+    patientDAO.updatePatientList(patientTrouve);
+    
+    cache[id].name = lastName + " " + firstName;
 }
 
-function getPatient(id) {
-    return patientDAO.retrievePatient(id);
-}
-  
 
-module.exports = { addPatient, getPatientList,getPatient,savePatient };
+
+module.exports = { addPatient, savePatient };
