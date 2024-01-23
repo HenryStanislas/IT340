@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TP GLRT</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <style>
+    :root {
+      --main-text-color: green;
+      --border-color: blue;
+      --section-bg-color: orange;
+      --padding-scale: 2rem; 
+      --header-font-size: 1.5rem;
+      --section-font-size: 1.125rem;
+      --footer-font-size: 1.25rem; 
+      --max-header-font-size: 5rem;
+      --min-header-font-size: 2rem; 
+    }
+
+    .header {
+      padding: var(--padding-scale);
+      border: 2px solid var(--border-color);
+      color: var(--main-text-color);
+      font-size: clamp(var(--min-header-font-size), var(--header-font-size), var(--max-header-font-size));
+      height: 5rem; 
+      width: 50%;
+      animation: font-slide 2s linear infinite; 
+    }
+  </style>
+  
+  <style>
+    .section {
+      padding: var(--padding-scale);
+      border: 2px solid var(--section-bg-color);
+      font-size: var(--section-font-size);
+      text-align: right;
+    }
+  </style>
+  
+  <style>
+    /* fichier footer.css */
+    .footer {
+      padding: var(--padding-scale);
+      border: 2px solid var(--border-color);
+      color: var(--main-text-color);
+      font-size: var(--footer-font-size);
+      text-align: right;
+    }
+  </style>
+
+  <style>
+    @keyframes font-slide {
+      from {
+        text-align: start;
+      }
+      
+      50% {
+        text-align: center;
+      }
+      
+      to {
+        text-align: end;
+      }
+    }
+
+    /* Use prefers-reduced-motion to disable animation */
+    @media (prefers-reduced-motion: reduce) {
+      .header {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">Ceci est un header</div>
+  
+  <div class="section">Section 1</div>
+  <div class="section">Section 2</div>
+  
+  <div class="footer">Ceci est un footer</div>
+</body>
+</html>
